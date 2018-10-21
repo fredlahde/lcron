@@ -14,10 +14,10 @@ use chrono::Utc;
 use std::str::FromStr;
 use chrono::prelude::*;
 
+#[derive(Debug)]
 struct Cronproc<'a> {
     cronstr: Cow<'a, str>,
     cronprogram: Cow<'a, str>,
-    cronargs: Cow<'a, str>,
 }
 
 fn main() {
@@ -50,14 +50,11 @@ fn main() {
             }
         }
 
-        let program = iter.next().unwrap();
-        let arg = iter.next().unwrap();
-
+        let program = &line_str[12..];
 
         let cronprc = Cronproc {
             cronstr: Cow::Owned(cron_str.to_owned()),
             cronprogram: Cow::Owned(program.to_owned()),
-            cronargs: Cow::Owned(arg.to_owned()),
         };
 
         cron_vec.push(cronprc);
@@ -85,7 +82,7 @@ fn get_timer_from_cron(cron_item: &Cronproc) -> i64 {
 
 fn print_cron(cron_item: &Cronproc) {
     println!("---------------");
-    println!("{} {}", cron_item.cronprogram, cron_item.cronargs);
+    println!("{}", cron_item.cronprogram);
     println!("Next execution due: {}", get_timer_from_cron(&cron_item));
     println!("---------------");
 }
@@ -103,8 +100,9 @@ fn next_min_sleep(crons: &Vec<Cronproc>) -> i64 {
 fn exec_cron(crons: &Vec<Cronproc>) {
     for cron_item in crons {
         if get_timer_from_cron(cron_item) <= 60 {
-            Command::new(cron_item.cronprogram.to_string())
-                .arg(cron_item.cronargs.to_string())
+            Command::new("sh")
+                .arg("-c")
+                .arg(cron_item.cronprogram.to_string())
                 .spawn()
                 .expect("sh command failed to start");
         }
