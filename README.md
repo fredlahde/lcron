@@ -19,9 +19,9 @@ You will need Rust and Cargo, I recommend installing it from rustup.
 
 create a ".larscrontab" file in your home directory and begin adding your cronjobs in this format:
 
-| Cron time format  | Program to execute |
-|---|---|---|
-| 0 * * * * *  | bash /home/lars/myscript.sh  |
+| Cron time format | Program to execute |
+|---               |---                 |
+| 0 * * * * *      | bash /foo/bar.sh   |
 
 This example crontab would execute myscript.sh in the first second of every minute of every hour of every day and so on.
 
