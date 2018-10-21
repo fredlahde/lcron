@@ -23,7 +23,7 @@ create a ".larscrontab" file in your home directory and begin adding your cronjo
 |---               |---                 |
 | 0 * * * * *      | bash /foo/bar.sh   |
 
-This example crontab would execute myscript.sh in the first second of every minute of every hour of every day and so on.
+This example crontab would execute bar.sh in the first second of every minute of every hour of every day and so on.
 
 Seconds are not honored right now and should always be set to 0.
 
