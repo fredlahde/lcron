@@ -19,7 +19,7 @@ You will need Rust and Cargo, I recommend installing it from rustup.
 
 create a ".larscrontab" file in your home directory and begin adding your cronjobs in this format:
 
-| Cron time format  | Program to execute
+| Cron time format  | Program to execute |
 |---|---|---|
 | 0 * * * * *  | bash /home/lars/myscript.sh  |
 
